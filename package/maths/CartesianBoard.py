@@ -1,6 +1,6 @@
 from package.maths.encapsulamento import Ponto, SegmentoReta, Circulo, Retangulo, Quadrado, Triangulo, TrianguloRetangulo
 
-class CartesianBord:
+class CartesianBoard:
     
     def __init__(self):
         self._objetos = {}

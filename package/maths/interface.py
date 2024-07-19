@@ -1,10 +1,10 @@
 from package.maths.encapsulamento import Ponto,SegmentoReta,Circulo,Retangulo,Quadrado,Triangulo,TrianguloRetangulo
-from package.maths.CartesianBord import CartesianBord
+from package.maths.CartesianBoard import CartesianBoard
 
 
 class Menu:
     def __init__(self) -> None:
-        self.dashboard = CartesianBord()
+        self.dashboard = CartesianBoard()
         
     def criacao_formas(self):
         
