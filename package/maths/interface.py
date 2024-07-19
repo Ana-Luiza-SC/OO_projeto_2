@@ -3,7 +3,7 @@ from package.maths.CartesianBoard import CartesianBoard
 
 
 class Menu:
-    def __init__(self) -> None:
+    def __init__(self):
         self.dashboard = CartesianBoard()
         
     def criacao_formas(self):
