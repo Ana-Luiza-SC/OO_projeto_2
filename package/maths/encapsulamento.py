@@ -26,6 +26,7 @@ class Formas():
 class Ponto():
     def __init__(self, nome, x: float, y: float):
         self._nome = nome
+        self._tipo = 'ponto'
         self._pos_x = x
         self._pos_y = y
 
@@ -55,6 +56,9 @@ class Ponto():
 
     def get_y(self):
         return self._pos_y
+    
+    def get_tipo(self):
+        return self._tipo
 
     def distancia_origem(self) -> float:
         return sqrt((self._pos_x)**2 + (self._pos_y)**2)
@@ -69,12 +73,16 @@ class Ponto():
         else:
             print(f'Ele está fora do primeiro quadrante, x= {self._pos_x} e y= {self._pos_y}')
             return False
+        
+    def area(self):
+        return 0
 
 class SegmentoReta():
     def __init__(self, nome, ponto1: Ponto, ponto2: Ponto):
         self._nome = nome
         self._ponto1 = ponto1
         self._ponto2 = ponto2
+        self._tipo = 'reta'
         
     def set_ponto1_x(self, x):
         self._ponto1.set_x(x)
@@ -106,10 +114,16 @@ class SegmentoReta():
     def get_ponto2_y(self):
         return self._ponto2.get_y()
     
+    def get_tipo(self):
+        return self._tipo
+    
     def model(self):
         ponto1 = self._ponto1
         ponto2 = self._ponto2
         print(f'Os parâmetros da minha reta são: a=({ponto1.get_x()},{ponto1.get_y()}) e b=({ponto2.get_x()},{ponto2.get_y()})')
+        
+    def area(self):
+        return 0
     
     def tamanho_reta(self):
         distancia = sqrt((self._ponto2.get_x() - self._ponto1.get_x()) ** 2 + (self._ponto2.get_y() - self._ponto1.get_y()) ** 2)
@@ -126,6 +140,7 @@ class Circulo():
         self._nome = nome
         self._centro = Ponto(nome, x, y)
         self._raio = raio
+        self._tipo = 'circulo'
         
     def get_nome(self):
         return self._nome
@@ -138,6 +153,9 @@ class Circulo():
     
     def get_centro_y(self):
         return self._centro.get_y()
+    
+    def get_tipo(self):
+        return self._tipo
     
     def set_nome(self, nova_nome):
         self._nome = nova_nome
@@ -169,12 +187,19 @@ class Retangulo():
         self._Ponto = Ponto(nome, x, y)
         self._altura = tam_altura
         self._comprimento = tam_comprimento
+        self._tipo = 'retangulo'
+        
+    def get_nome(self):
+        return self._nome
         
     def get_Ponto_x(self):
         return self._Ponto.get_x()
     
     def get_Ponto_y(self):
         return self._Ponto.get_y()
+    
+    def get_tipo(self):
+        return self._tipo
     
     def set_nome(self, nova_nome):
         self._nome = nova_nome
@@ -213,10 +238,14 @@ class Retangulo():
     def perimetro(self):
         perimetro = 2 * self._altura + 2 * self._comprimento
         print(f'O perímetro é igual a {perimetro}')
+        
+    def model(self):
+        print(f'O Retângulo {self.get_nome()} possui as coordenadas ({self.get_Ponto_x():.2f},{self.get_Ponto_y():.2f}) e os lados iguais a {self.get_altura():.2f} {self.get_comprimento():.2f}')
 
 class Quadrado(Retangulo):  # herança
     def __init__(self, nome, x: float, y: float, tam_altura):
         super().__init__(nome, x, y, tam_altura, tam_altura)
+        self._tipo = 'quadrado'
     
     def get_lado(self):
         return self._altura
@@ -251,6 +280,9 @@ class Quadrado(Retangulo):  # herança
     def area(self) -> float:
         return self.get_altura() ** 2
     
+    def model(self):
+        print(f'O Quadrado {self.get_nome()} possui as coordenadas ({self.get_Ponto_x():.2f},{self.get_Ponto_y():.2f}) e os lados iguais a {self.get_altura():.2f}')
+    
 class Triangulo():
     def __init__(self, nome, ponto_1: Ponto, ponto_2: Ponto, ponto_3: Ponto):
         self._nome = nome
@@ -260,6 +292,7 @@ class Triangulo():
         self._lado1 = SegmentoReta(nome, ponto_1, ponto_2)
         self._lado2 = SegmentoReta(nome, ponto_2, ponto_3)
         self._lado3 = SegmentoReta(nome, ponto_1, ponto_3)
+        self._tipo = 'triangulo'
     
     def get_nome(self):
         return self._nome
@@ -275,6 +308,9 @@ class Triangulo():
     
     def get_lado3(self):
         return self._lado3
+    
+    def get_tipo(self):
+        return self._tipo
     
     def set_ponto1_x(self, x):
         self._ponto1.set_x(x)
@@ -332,6 +368,7 @@ class Triangulo():
 class TrianguloRetangulo(Triangulo):
     def __init__(self, nome, ponto_1: Ponto, ponto_2: Ponto, ponto_3: Ponto):
         super().__init__(nome, ponto_1, ponto_2, ponto_3)
+        self._tipo = 'triangulo_retangulo'
     
     def is_retangulo(self):
         if self.is_triangulo():
@@ -342,4 +379,21 @@ class TrianguloRetangulo(Triangulo):
             return isclose(lados[0]**2 + lados[1]**2, lados[2]**2)
         else:
             return False
-
+        
+    def get_tipo(self):
+        return self._tipo
+        
+    def area(self):
+        lado1 = self._lado1.tamanho_reta()
+        lado2 = self._lado2.tamanho_reta()
+        lado3 = self._lado3.tamanho_reta()
+        
+        if lado1 > lado2 and lado1 > lado3:
+            return ((lado3*lado2)/2)
+        
+        elif lado2 > lado3 and lado2 > lado1:
+            return ((lado1*lado3)/2)
+        
+        else:
+            return((lado2*lado1)/2)
+            
