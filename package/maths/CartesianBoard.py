@@ -47,14 +47,3 @@ class CartesianBoard:
                 if  forma.get_tipo() == tipo:
                      print(f'{nome}')
 
-    def mostrar_detalhes(self, nome):
-        try:
-            if nome in self._objetos:
-                forma = self._objetos[nome]
-                forma.model()
-                
-            else:
-                print(f'Forma com nome {nome} não encontrada.')
-                
-        except:
-            print(f'Ocorreu algum erro ao mostrar detalhes da forma:') 
