@@ -44,7 +44,7 @@ class CartesianBoard:
             
         else:
             for nome, forma in self._objetos.items():
-                if  forma.get_tipo() == 'ponto':
+                if  forma.get_tipo() == tipo:
                      print(f'{nome}')
 
     def mostrar_detalhes(self, nome):

@@ -354,6 +354,12 @@ class Triangulo():
         
         return lado1 + lado2 > lado3 and lado2 + lado3 > lado1 and lado1 + lado3 > lado2
     
+    def perimetro(self):
+        lado1 = self._lado1.tamanho_reta()
+        lado2 = self._lado2.tamanho_reta()
+        lado3 = self._lado3.tamanho_reta()
+        return (lado1 + lado2+ lado3)
+    
     def area(self) -> float:
         if self.is_triangulo():
             lado1 = self._lado1.tamanho_reta()

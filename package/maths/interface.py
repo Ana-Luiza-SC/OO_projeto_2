@@ -24,10 +24,17 @@ class Menu:
                 print('')
                 if verificacao>0 and verificacao<8:
                     break
+                else:
+                    print('Os números precisam ser inteiros de 1 a 7.')
+                    saida = input('Deseja continuar? (s/n): ').lower()
+                    if saida[0] == 'n':
+                        break
         
             except :
-                print('Entrada inválida. Digite um número inteiro.')
-                print('\n')
+                print('Parâmetros inválidos. Digite um número inteiro.')
+                saida = input('Deseja continuar? (s/n): ').lower()
+                if saida[0] == 'n':
+                    break
 
         if verificacao == 1:
             
@@ -253,7 +260,7 @@ class Menu:
                         break
         
     def remover_formas(self):
-        print('A seguintes formas estão cadastradas:')
+        print('A seguintes formas estão cadastradas:\n')
         self.dashboard.listar_formas()
         
         while True:
@@ -332,37 +339,37 @@ OBS: O novo ponto existirá apenas para a comparação da intersecção""")
     2. Um retângulo novo
     OBS: As formas criadas por aqui serão apenas para comparação, não para armazenamento""")
             
-            condicao_forma = int(input('Escreva a opção escolhida: '))
+            
             while True:
-                try:        
+                try:
+                    condicao_forma = int(input('Escreva a opção escolhida: '))
                     if condicao_forma == 1:
-                        while True:
+                                            
+                        try:
                             print('Os retângulos cadastrados são:')
                             self.dashboard.listar_formas_classe('retangulo')
-                            nome_forma = input('Escreva o nome do quadrado desejado (o nome antes dos dois pontos): ')
+                            nome_forma = input('Escreva o nome do retângulo: ')
+                            forma_comparada = self.dashboard._objetos[nome_forma]
+                            break
+                                
+                        except:
+                            print('Parãmetro do nome inválido')
+                            saida = input('Deseja continuar? (s/n): ').lower()
+                            if saida[0] == 'n':
+                                continuar = False
+                                break 
                             
-                            try:
-                                forma_comparada = self.dashboard._objetos[nome_forma]
-                                break
-                            
-                            except:
-                                print('Parãmetro do nome inválido')
-                                saida = input('Deseja continuar? (s/n): ')
-                                if saida[0] == 'n':
-                                    continuar = False
-                                    break
-                        
                     elif condicao_forma == 2:
                         while True:
                             try:
                                 x, y = map(float, input('Escreva as coordenadas do canto inferior esquerdo (separadas por espaço): ').split())
                                 altura = float(input('Escreva a altura do retângulo: '))
                                 comprimento = float(input('Escreva o comprimento do retângulo: '))
-                                
+                                    
                                 if x >=0 and y >=0 and altura >0 and comprimento>0:
                                     forma_comparada = Retangulo('', x, y, altura, comprimento)
                                     break
-                                
+                                    
                                 else:
                                     print('As coordenadas precisam ser maiores ou iguais a 0; a altura e o comprimento precisam ser maiores que 0')
                                     saida = input('Deseja continuar criando o retângulo? (s/n): ').lower()
@@ -370,15 +377,15 @@ OBS: O novo ponto existirá apenas para a comparação da intersecção""")
                                     if saida[0] == 'n':
                                         continuar = False
                                         break        
-                            
+                                
                             except:
-                                print('Parâmetros inválidos para o retângulo.')
-                                saida = input('Deseja continuar criando o retângulo? (s/n): ').lower()
-                                print('\n')
-                                if saida[0] == 'n':
-                                    continuar = False
-                                    break
-            
+                                    print('Parâmetros inválidos para o retângulo.')
+                                    saida = input('Deseja continuar criando o retângulo? (s/n): ').lower()
+                                    print('\n')
+                                    if saida[0] == 'n':
+                                        continuar = False
+                                        break
+                
                     else:
                         print('Parâmtro inválido. Escreva 1 ou 2.')
                         saida = input('Deseja continuar? (s/n): ').lower()
@@ -471,7 +478,7 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
     def distancia_entre_pontos(self):
 ## primeiro ponto  
         while True:
-            print("""Escolha entre as seguintes opções para o primeiro Ponto:
+            print("""Escolha entre as seguintes opções para o ponto 1:
     1. Usar um ponto já existente
     2. Usar um ponto novo
 OBS: O novo ponto existirá apenas para a comparação da distância""")
@@ -522,6 +529,7 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
                 if saida[0] == 'n':
                     show_saida = False
                     break
+        print('')
         
         if show_saida:   
             while True:
@@ -533,7 +541,7 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
                 print('')
                 
                 if condicao_ponto == 1:
-                    print('Os Pontos cadastrados são:\n')
+                    print('Os Pontos cadastrados são:')
                     self.dashboard.listar_formas_classe('ponto')
                     nome_ponto = input('Escreva o nome do ponto desejado: ')
                     
@@ -578,7 +586,7 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
         if show_saida:
             reta_qualquer = SegmentoReta('', ponto_1,ponto_2)
             distancia = reta_qualquer.tamanho_reta()
-            print(f'A distancia entre os dois pontos é igual a {distancia}')
+            print(f'A distancia entre os dois pontos é igual a {distancia:.2f}')
             print('')
                     
     
