@@ -64,14 +64,14 @@ class Ponto():
         return sqrt((self._pos_x)**2 + (self._pos_y)**2)
     
     def model(self):
-        print(f'Os parâmetros do ponto são: x= {self._pos_x} e y= {self._pos_y}')
+        print(f'Os parâmetros do ponto são: x= {self.get_x():.2f} e y= {self.get_y():.2f}')
     
     def verificacao_quadrante(self):
         if (self._pos_x >= 0 and self._pos_y >= 0):
             print(f'Ele se encontra no primeiro quadrante')
             return True
         else:
-            print(f'Ele está fora do primeiro quadrante, x= {self._pos_x} e y= {self._pos_y}')
+            print(f'Ele está fora do primeiro quadrante, x= {self.get_x():.2f} e y= {self.get_y():.2f}')
             return False
         
     def area(self):
@@ -120,7 +120,7 @@ class SegmentoReta():
     def model(self):
         ponto1 = self._ponto1
         ponto2 = self._ponto2
-        print(f'Os parâmetros da minha reta são: a=({ponto1.get_x()},{ponto1.get_y()}) e b=({ponto2.get_x()},{ponto2.get_y()})')
+        print(f'Os parâmetros da reta são: a=({ponto1.get_x():.2f},{ponto1.get_y():.2f}) e b=({ponto2.get_x():.2f},{ponto2.get_y():.2f})')
         
     def area(self):
         return 0
@@ -173,7 +173,7 @@ class Circulo():
         self._centro.set_y(y)
     
     def model(self):
-        print(f'O circulo possui centro em ({self.get_centro_x()}, {self.get_centro_y()}) e raio = {self.get_raio()}')
+        print(f'O circulo possui centro em ({self.get_centro_x():.2f}, {self.get_centro_y():.2f}) e raio = {self.get_raio():.2f}')
     
     def distancia_centro_origem(self):
         print(f'A distância entre o centro do círculo e a origem é {self._centro.distancia_origem():.2f}')

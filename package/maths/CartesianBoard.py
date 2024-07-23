@@ -21,7 +21,7 @@ class CartesianBoard:
         try:
             if nome in self._objetos:
                 del self._objetos[nome]
-                print(f'A forma com nome {nome} foi removida com sucesso.')
+                print(f'A forma com nome {nome} foi removida com sucesso.\n')
                 
             else:
                 print(f'Forma com nome {nome} não encontrada.')
@@ -37,7 +37,7 @@ class CartesianBoard:
             for nome, forma in self._objetos.items():
                 print(f'{nome}: {forma.get_nome()} da classe {forma.get_tipo()}')
         print('')
-                
+                        
     def listar_formas_classe(self,tipo):
         if not self._objetos:
             print('Nenhuma forma cadastrada.')
@@ -46,4 +46,8 @@ class CartesianBoard:
             for nome, forma in self._objetos.items():
                 if  forma.get_tipo() == tipo:
                      print(f'{nome}')
+                     
+    def mostrar_detalhes(self,nome_forma):
+        self._objetos[nome_forma].model()
+        print('')
 

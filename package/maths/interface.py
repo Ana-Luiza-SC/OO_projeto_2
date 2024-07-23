@@ -611,7 +611,7 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
             nome = input('Escreva o nome da forma que você deseja obter a área: ')
             try:
                 minha_forma = self.dashboard._objetos[nome]
-                print(f'A area da forma {nome} é igual a {minha_forma.area()}')
+                print(f'A area da forma {nome} é igual a {minha_forma.area():.2f}')
                 print('')
                 break
             
@@ -697,6 +697,20 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
             2. Usar uma reta novo
         OBS: A nova reta existirá apenas para a comparação da distância""")
                     
+                    while True:
+                        condicao_retangulo = int(input('Escreva a opção escolhida:'))
+                        if condicao_retangulo== 1 or condicao_retangulo == 2: 
+                            break
+                        else:
+                            print('Os valores precisam ser 1 ou 2')
+                            saida = input('Deseja continuar? (s/n): ').lower()
+                            print('')
+                            if saida[0] == 'n':
+                                show_saida = False
+                                break
+                                    
+                    
+            
                     if condicao_ponto == 1:
                         print('As retas cadastrados são:')
                         self.dashboard.listar_formas_classe('reta')
@@ -752,10 +766,29 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
             distancia_1_2 = reta_1.tamanho_reta() + reta_2.tamanho_reta()
             
             if distancia_1_2<= (1.1*distancia_reta):
-                print('O ponto está próximo a reta')
+                print('O ponto está próximo a reta\n')
                 
             else:
-                print('O ponto está distante da reta')
+                print('O ponto está distante da reta\n')
+                
+    def mostrar_detalhe(self):
+        print('A seguintes formas estão cadastradas:\n')
+        self.dashboard.listar_formas()
+        
+        while True:
+            try:
+                nome_forma = input('Você deseja ver os detalhes de qual forma? (Escreva o nome antes dos dois pontos):')
+                self.dashboard.mostrar_detalhes(nome_forma)
+                break
+                
+            except:
+                print('Nome inválido')
+                saida = input('Deseja tentar novamente? (s/n): ').lower()
+                print('')
+                if saida[0] == 'n':
+                    break
+            
+            
                         
         
         
@@ -770,8 +803,9 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
     5. Distância do Ponto até a Origem
     6. Distância entre dois Pontos
     7. Mostrar a área
-    8. Mostrar detalhes da forma
-    8. Sair""")
+    8. Verificar se um ponto está próximo à uma reta
+    9. Mostrar detalhe de alguma forma cadastrada
+    10. Sair""")
                 
                 saida = int(input('Escreva a opção escolhida: '))
                 print('')
@@ -797,10 +831,17 @@ OBS: O novo ponto existirá apenas para a comparação da distância""")
                     
                 elif saida == 7:
                     self.show_area()
-
+                    
                 elif saida == 8:
+                    self.ponto_segmento_reta()
+                    
+                elif saida == 9:
+                    self.mostrar_detalhe()
+
+                elif saida == 10:
                     print('Saindo do programa')
                     break
+                
                 else:
                     print('Opção inválida! Escolha um número de 1 a 8.')
             except:
